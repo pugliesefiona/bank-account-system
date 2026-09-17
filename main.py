@@ -1,4 +1,5 @@
 from src.account import Account
+from src.savings_account import SavingsAccount
 
 
 # creamos dos cuentas para probar las funcionalidades de la clase
@@ -40,6 +41,33 @@ except ValueError as error:
 # probamos qué pasa cuando intentamos hacer un depósito inválido
 try:
     account_1.deposit(-100)
+
+except ValueError as error:
+    print(f"error: {error}")
+
+
+# creamos una cuenta de ahorro
+savings = SavingsAccount("fiona", "003", 1000, 0.05)
+
+
+# mostramos la información inicial
+print(savings)
+
+
+# agregamos el interés al saldo
+interest = savings.add_interest()
+print(f"interés agregado: ${interest:.2f}")
+print(f"saldo después del interés: ${savings.balance:.2f}")
+
+
+# probamos el retiro de la cuenta de ahorro
+savings.withdraw(200)
+print(f"saldo después del retiro: ${savings.balance:.2f}")
+
+
+# probamos la regla del saldo mínimo
+try:
+    savings.withdraw(800)
 
 except ValueError as error:
     print(f"error: {error}")

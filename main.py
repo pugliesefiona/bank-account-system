@@ -1,5 +1,6 @@
 from src.account import Account
 from src.savings_account import SavingsAccount
+from src.account_manager import AccountManager
 
 
 # creamos dos cuentas para probar las funcionalidades de la clase
@@ -71,3 +72,24 @@ try:
 
 except ValueError as error:
     print(f"error: {error}")
+
+# --------------------------------------------------------------------------
+
+# creamos un administrador de cuentas
+manager = AccountManager()
+
+# agregamos las cuentas al administrador
+manager.add_account(account_1)
+manager.add_account(account_2)
+manager.add_account(savings)
+
+# buscamos una cuenta por su número
+found_account = manager.find_account("002")
+print(f"cuenta encontrada: {found_account}")
+
+# calculamos el saldo total de todas las cuentas
+print(f"saldo total: ${manager.get_total_balance():.2f}")
+
+# eliminamos una cuenta
+manager.remove_account("002")
+print(f"saldo total después de eliminar la cuenta: ${manager.get_total_balance():.2f}")
